@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: medsum_backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on: []
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: medsum_frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  default:
+    name: medsum_net
